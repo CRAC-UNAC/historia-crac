@@ -1,0 +1,1602 @@
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unidad Nacional Canina - Policía Nacional del Ecuador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>  
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    :root {
+    --police-blue: #154986; /* COLOR AZUL POLICÍA */
+    --police-gray: #a7a9ab; /* COLOR GRIS POLICÍA */
+    --canine-yellow: #ff9e15; /* COLOR AMARILLO CANINO */
+    --canine-black: #1f2937; /* color negro del CANINO */
+    --white: #ffffff;
+    --light-gray: #f9fafb;
+    --azul: #140338;
+    --black: #000000;
+    }
+
+    body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--canine-black);
+    scroll-behavior: smooth;
+    }
+
+    /* ENCABEZADO DE LA HISTORIA */
+    .header {
+    background: linear-gradient(
+        135deg,
+        var(--police-blue) 0%,
+        var(--canine-black) 100%
+    );
+    padding: 1rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+    max-width: 1200auto;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    }
+
+    .logo-left, .logo-right {
+    display: flex; /* Utiliza flexbox para alinear el logo y el texto */
+    align-items: center;
+    }
+
+    .logo-img {
+    width: 60px; /* Ajusta el tamaño de la imagen del logo */
+    height: auto;
+    margin-right: 15px; /* Espacio entre el logo y el texto a la izquierda */
+    }
+
+    /* Estilo para el logo de la derecha si lo necesitas, puedes ajustar el margen */
+    .logo-right .logo-img {
+    width: 80px; /* Ajusta el tamaño de la imagen del logo */
+    height: auto;
+    margin-right: 0;
+    margin-left: 15px; /* Espacio entre el logo y otros elementos */
+    }
+
+    .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    }
+
+    .logo {
+    width: 50px;
+    height: 50px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--police-blue);
+    font-weight: bold;
+    }
+
+    .header-text {
+    color: var(--white);
+    }
+
+    .header-text h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    }
+
+    .header-text p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    }
+
+    .nav {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    }
+
+    .nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+    background: var(--canine-yellow);
+    color: var(--canine-black);
+    }
+
+    .mobile-menu {
+    display: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    }
+
+    /* SECCIÓN CONTENIDO */
+    .main-content {
+    /* tamaño del contenido */
+    margin-top: 0%;
+    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    }
+
+        /* seccion del carusel */
+
+    .section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    }
+
+    .section-title {
+    text-align: center;
+    color: var(--police-blue);
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    }
+
+    .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--canine-yellow);
+    }
+
+    #inicio {
+    position: relative;
+    /* Elimina el background del section, ya que lo tendrá el slideshow */
+    color: var(--white);
+    text-align: center;
+    overflow: hidden; /* Importante para que las imágenes no se desborden */
+    height: 65vh; /* Ajusta la altura de la sección según tus necesidades, por ejemplo, 100vh para que ocupe toda la ventana */
+    }
+
+    .background-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    }
+
+    .background-slideshow .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0; /* Las imágenes estarán ocultas por defecto */
+    transition: opacity 1.5s ease-in-out; /* Transición para un efecto de fundido suave */
+    }
+
+    .background-slideshow .slide.active {
+    opacity: 1; /* La imagen activa es visible */
+    }
+
+    .content-overlay {
+    position: relative; /* Lo posiciona sobre el carrusel de fondo */
+    z-index: 2; /* Lo mantiene por encima de las imágenes */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(
+        63,
+        91,
+        122,
+        0.39
+    ); /* Superposición de color para mejorar la legibilidad del texto */
+    }
+
+    /* secciòn linea de tiempo */
+
+    /*<!--Linea de tiempo con CSS y JavaScript-->*/
+
+    @import url("https://fonts.googleapis.com/css?family=Cardo|Pathway+Gothic+One");
+
+    .timeline {
+    display: FLEX;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 1000px;
+    position: relative;
+    }
+
+    .timeline:before {
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    margin-left: -1px;
+    content: "";
+    background: rgba(255, 255, 255, 0.07); /* Color de la línea de tiempo */
+    }
+
+    @media only screen and (max-width: 767px) {
+    .timeline:before {
+    left: 40px;
+    }
+    }
+
+    .timeline__content-title {
+    font-weight: normal;
+    font-size: 66px;
+    margin: -10px 0 0 0;
+    transition: 0.4s;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-family: "Pathway Gothic One", sans-serif;
+    color: #fff; /* Color del título del contenido de la línea de tiempo */
+    }
+
+    .timeline__content-desc {
+    margin: 0;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.863); /* color del texto del contenido de la línea de tiempo */
+    font-family: Cardo;
+    font-weight: normal;
+    line-height: 25px;
+    }
+
+    .timeline-item {
+    padding: 40px 0;
+    opacity: 0.3;
+    filter: blur(2px);
+    transition: 0.5s;
+    box-sizing: border-box;
+    width: calc(50% - 40px);
+    display: flex;
+    position: relative;
+    transform: translateY(-80px);
+    }
+
+    .timeline-item:before {
+    white-space: pre-line; /* respeta saltos de línea */
+    content: attr(data-text);
+    letter-spacing: 3px;
+    width: 100%;
+    position: absolute;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    font-family: "Pathway Gothic One", sans-serif;
+    border-left: 2px solid rgba(255, 255, 255, 0.5); /* Color de la línea antes del texto */
+    top: 70%;
+    margin-top: -5px;
+    padding-left: 15px;
+    opacity: 0;
+    right: calc(-100% - 56px);
+    }
+
+    .timeline-item:nth-child(even) {
+    align-self: flex-end;
+    }
+
+    .timeline-item:nth-child(even):before {
+    right: auto;
+    text-align: right;
+    left: calc(-100% - 56px);
+    padding-left: 0;
+    border-left: none;
+    border-right: 2px solid rgba(255, 255, 255, 0.5); /* Color de la línea antes del texto */
+    padding-right: 15px;
+    }
+
+    .timeline-item--active {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+    }
+
+    .timeline-item--active:before {
+    top: 50%;
+    transition: 0.3s all 0.2s;
+    opacity: 1;
+    }
+
+    .timeline-item--active .timeline__content-title {
+    margin: -50px 0 20px 0;
+    }
+
+    @media only screen and (max-width: 767px) {
+    .timeline-item {
+    align-self: baseline !important;
+    width: 100%;
+    padding: 0 30px 150px 80px;
+    }
+
+    .timeline-item:before {
+    left: 10px !important;
+    padding: 0 !important;
+    top: 50px;
+    text-align: center !important;
+    width: 60px;
+    border: none !important;
+    }
+
+    .timeline-item:last-child {
+    padding-bottom: 40px;
+    }
+    }
+
+    .timeline__img {
+    max-width: 100%;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4); /* Sombra de la imagen */
+    }
+
+    .timeline-container {
+    width: 100vw;
+    margin-left: calc(50% - 50vw); /* Saca el fondo fuera de cualquier contenedor */
+    margin-right: calc(50% - 50vw);
+    position: relative;
+    padding: 80px 0;
+    transition: 0.3s ease 0s;
+    background-attachment: fixed;
+    background-size: cover;
+    }
+
+    .timeline-container:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(144, 124, 124, 0.799); /* Fondo del contenedor de la línea de tiempo */
+    content: "";
+    }
+
+    .timeline-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+    }
+
+    .timeline-header__title {
+    color: #fff; /* Color del título del encabezado de la línea de tiempo */
+    font-size: 46px;
+    font-family: Cardo;
+    font-weight: normal;
+    margin: 0;
+    }
+
+    .timeline-header__subtitle {
+    color: rgba(255, 255, 255, 0.5); /* Color del subtítulo del encabezado de la línea de tiempo */
+    font-family: "Pathway Gothic One", sans-serif;
+    font-size: 16px;
+    letter-spacing: 5px;
+    margin: 10px 0 0 0;
+    font-weight: normal;
+    }
+
+    /* finalización de la línea de tiempo */  
+
+
+    /* SECCION DE RECONOCIMIENTOS */
+    .reconocimientos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    }
+
+    .reconocimiento-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    }
+
+    .reconocimiento-card:hover {
+    transform: translateY(-5px);
+    }
+
+    .reconocimiento-icon {
+    font-size: 3rem;
+    color: var(--canine-yellow);
+    margin-bottom: 1rem;
+    }
+
+    /* Revistas Section */
+    .revistas-carousel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    }
+
+    .revista-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    }
+
+    .revista-card:hover {
+    transform: scale(1.05);
+    }
+
+    .revista-cover {
+    height: 250px;
+    background: linear-gradient(
+        135deg,
+        var(--white),
+        var(--white)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2rem;
+    }
+
+    .revista-info {
+    padding: 1rem;
+    }
+
+    .revista-btn {
+    background: var(--police-blue);
+    color: var(--white); /* color de letras del boton */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 0.25rem;
+    transition: background 0.3s ease;
+    }
+
+    .revista-btn:hover {
+    background: var(--canine-yellow);
+    color: var(--canine-black);
+    }
+
+    /* Estadísticas Section */
+    .estadisticas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    }
+
+    .stat-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid var(--canine-yellow);
+    }
+
+    .stat-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--police-blue);
+    }
+
+    .stat-label {
+    color: var(--police-gray);
+    margin-top: 0.5rem;
+    }
+
+    .chart-container {
+    height: 200px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--police-gray);
+    }
+
+    /* Footer */
+    .footer {
+    background: var(--canine-black);
+    color: var(--white);
+    padding: 3rem 2rem 1rem;
+    }
+
+    .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    }
+
+    .footer-section h3 {
+    color: var(--canine-yellow);
+    margin-bottom: 1rem;
+    }
+
+    .social-links {
+    display: flex;
+    gap: 1rem;
+    }
+
+    .social-links a {
+    color: var(--white);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+    color: var(--canine-yellow);
+    }
+
+    .map-container {
+    height: 200px;
+    background: var(--police-gray);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s infinite;
+    z-index: 1000;
+    }
+
+    @keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+    }
+
+    .whatsapp-tooltip {
+    position: absolute;
+    right: 70px;
+    background: var(--canine-black);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    }
+
+    .whatsapp-float:hover .whatsapp-tooltip {
+    opacity: 1;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+    .nav {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .jefe-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .historia-content {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .header-text h1 {
+        font-size: 1rem;
+    }
+
+    .header-text p {
+        font-size: 0.8rem;
+    }
+    }
+
+    @media (max-width: 480px) {
+    .section {
+        padding: 2rem 1rem;
+    }
+
+    .jefe-photo {
+        width: 200px;
+        height: 250px;
+    }
+
+    .whatsapp-float {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+    }
+    }
+
+    .fade-in {
+    animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    }
+
+    /* ESTILOS DEL BOTÓN SCROLL TO TOP */
+    .scroll-to-top {
+    position: fixed;
+    left: 30px; /* Ubicado en el lado izquierdo */
+    bottom: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 1000;
+    }
+
+    .scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    }
+
+    .scroll-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+
+    .scroll-to-top:active {
+    transform: translateY(-2px);
+    }
+
+    /* Flecha hacia arriba */
+    .scroll-to-top::before {
+    content: '↑';
+    font-weight: bold;
+    font-size: 24px;
+    }
+
+    /* Alternativa con símbolo diferente */
+    .scroll-to-top.arrow-style::before {
+    content: '⬆';
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+    .scroll-to-top {
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    }
+    }
+
+
+
+/* CIERRE DEL BOTÓN SCROLL TO TOP */
+
+    </style>
+  </head>
+  <body>
+      <!-- ENCABEZADO-->
+
+  <header class="header">
+  <div class="header-content">
+
+  <div class="logo-left">
+    <img src="img/logopolicia.png" alt="Logo Policía Nacional" class="logo-img">
+    <div class="header-text">
+    </div>
+  </div>
+
+  <nav>
+    <ul class="nav">
+      <li><a href="https://www.policia.gob.ec/unidad-nacional-canina/" target="_blank" class="active">Inicio</a></li>
+      <li><a href="#timeline-section">Historia</a></li>
+      <li><a href="#reconocimientos">Reconocimientos</a></li>
+      <li><a href="#contactos">Contactos</a></li>
+    </ul>
+  </nav>
+
+  <div class="logo-right">
+    <img src="img/logocracA.png" alt="Logo CRAC" class="logo-img">
+  </div>
+
+  <div class="mobile-menu">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  </div>
+  </header>
+      <!-- Main Content -->
+    
+  <main class="main-content">
+
+  <section id="inicio" class="section fade-in">
+    <div class="background-slideshow">
+      <div
+        class="slide active"
+        style="background-image: url('img/historia/pastor.jpg')"
+      ></div>
+      <div
+        class="slide"
+        style="background-image: url('img/historia/crlpstr.jpeg')"
+      ></div>
+      <div
+        class="slide"
+        style="background-image: url('img/historia/1990..png')"
+      ></div>
+      <div
+        class="slide"
+        style="background-image: url('img/historia/1990.png')"
+      ></div>
+    </div>
+    <div class="content-overlay">
+      <h1 style="font-size: 3rem; margin-bottom: 1rem">
+        CRAC
+      </h1>
+      <p
+        style="
+          font-size: 1.2rem;
+          opacity: 0.9;
+          max-width: 600px;
+          margin: 0 auto;
+        "
+      >
+        "Fieles amigos al servicio de la comunidad"
+      </p>
+      <div style="margin-top: 2rem">
+        <button onclick="scrollToSection('timeline-section')" style="background: var(--canine-yellow); color: var(--canine-black); border: none; padding: 1rem 2rem; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 0.5rem; font-size: 1rem;">Conoce Nuestra Historia</button
+        >
+    </div>
+  </section>
+
+  <section id="ambitos" class="py-20 bg-gray-100">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12" data-aos="fade-up"></h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+      </div>
+  </section>
+          
+        <!-- Historia -->
+          <!-- Nueva Linea de Tiempo -->
+
+  <section id="timeline-section">
+    <div id="timeline-1" class="timeline-container">
+          <div class="timeline-header">
+              <h2 class="timeline-header__title">CENTRO REGIONAL DE ADIESTRAMIENTO CANINO</h2>
+              <h3 class="timeline-header__subtitle">“La historia nunca antes contada”</h3>
+          </div>
+
+          <div class="timeline">
+              <div class="timeline-item" data-text="EL INICIO DE LA POLICÍA NACIONAL DEL ECUADOR">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1832.gif" alt="INHEPOL FUENTE">
+                      <h2 class="timeline__content-title">1832</h2>
+                      <p class="timeline__content-desc">Desde el Decreto del Congreso Constitucional del Estado ecuatoriano, 
+                      del 26 de octubre de 1832, hasta el Decreto del señor General Alberto Enríquez Gallo del 2 de marzo de 1938, 
+                      la situación de la Policía era incierta y carente de una adecuada orientación como organismo, 
+                      siempre fue localista, sus miembros no tenían la continuidad requerida para adquirir basamentos técnicos 
+                      suficientes que la proyecten con dinamismo hacia el progreso.
+                    </p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="PRIMERA ESCUADRA CANINA DE CONTROL DEL ORDEN PÚBLICO">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/19601.gif" alt="HISTORIA">
+                      <h2 class="timeline__content-title">1960</h2>
+                      <p class="timeline__content-desc">Desde 1960 la Policía Nacional conformó la primera Escuadra Canina destinada al Control del Orden Público. Los canes eran utilizados para patrullaje preventivo, disuasión y presentaciones de agilidad canina en desfiles y eventos cívicos. Este primer equipo marcó el origen del trabajo policial con canes en el Ecuador, sentando bases operativas que luego evolucionarían hacia unidades más técnicas.
+                      </p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="PRIMER CURSO INTERNACIONAL DE ADIESTRAMIENTO CANINO">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1969dc.gif" alt="Curso Internacional">
+                      <h2 class="timeline__content-title">1969</h2>
+                      <p class="timeline__content-desc">Por primera vez en la vida institucional y por las gestiones oportunas 
+                      del señor General Washington Martínez Torres, Comandante General de la Policía Nacional del Ecuador de aquella época, 
+                      el 22 de enero del 1969 viajaron a la República de Colombia tres señores Oficiales de la Policía Nacional, 
+                      Teniente Julio Novoa A., Subteniente Gustavo Zapata A. y Subteniente Luis Cárdenas E. 
+                      para capacitarse en un curso de adiestramiento de perros policías en la "Escuela de Carabineros de Suba" de la cuidad de Bogotá.
+                      Tras once meses de formación, retornaron con los primeros canes policías: Arnol, Miky y Thor, quienes participaron por primera vez en el desfile cívico militar por la Fundación de Quito.
+                    </p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="PRIMERA ESCUELA DE ADIESTRAMIENTO DE CANES EN GUAYAQUIL">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1970.gif" alt="Primera Escuela Canina">
+                      <h2 class="timeline__content-title">1970</h2>
+                      <p class="timeline__content-desc">A inicios del año 1970, en la ciudad de Guayaquil, 
+                        se forma la primera Escuela de Adiestramiento de Canes que funcionó en las instalaciones del Cuartel Modelo. 
+                        En este lugar se realizó el primer curso de adiestramiento de canes, con la presencia de veinte señores Guías 
+                        y veinte canes de raza Pastor Alemán adquiridos en Colombia. 
+                        Para ese entonces la Escuela contó con tres Oficiales Instructores y veinte Guías con igual número de canes, 
+                        grupo selecto, considerado como especial, que tuvo a su cargo la seguridad presidencial 
+                        del Dr. José María Velasco Ibarra, Presidente Constitucional del Ecuador, 
+                        en los desplazamientos a diferentes lugares del país.
+                      </p>
+                  </div>
+              </div>
+
+             <div class="timeline-item" data-text="PRIMERA UNIDAD CANINA">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1970PU.png" alt="Primera Unidad">
+                      <h2 class="timeline__content-title">1970</h2>
+                      <p class="timeline__content-desc">"A mediados de 1970, se construyó la Unidad Canina en la ciudad de Quito, 
+                          dentro de las instalaciones de la Escuela de Formación de Tropa 'Sgto. P. José Emilio Castillo Solís', 
+                          ubicada en la vía a la Mitad del Mundo, sector de Pusuquí, actual Escuela Superior de Policía, 
+                          bajo la dirección del Subteniente Luis Cárdenas E."</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="CAPACITACIONES INTERNACIONALES">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1974.gif" alt="Primera Unidad">
+                      <h2 class="timeline__content-title">1974</h2>
+                      <p class="timeline__content-desc">"En 1974, los oficiales Subteniente Marco Cuvero Vélez, Subteniente José Vinueza Jarrín y Policía Grunauhuer Pinto 
+                          viajaron a Colombia para realizar un curso de adiestramiento de canes. Para esa fecha, 
+                          los perros de las Unidades Caninas ya estaban dados de alta en las filas policiales, 
+                          con un salario equivalente al de un caballo de la institución, destinado a su alimentación y mantenimiento."</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="PRIMER CURSO DE PERROS ANTIDROGAS REALIZADO EN ESTADOS UNIDOS">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1976.gif" alt="Primera Curso Antidrogas">
+                      <h2 class="timeline__content-title">1976</h2>
+                      <p class="timeline__content-desc">"En 1976, los oficiales Capitán Gustavo Zapata y Subtenientes Marco Cuvero y José Vinuesa 
+                          viajaron a Estados Unidos para realizar el primer curso de perros detectores de drogas. 
+                          Tras completar satisfactoriamente la capacitación, asumieron el liderazgo de la Unidad Canina y 
+                          llevaron a cabo un curso de adiestramiento en Pusuquí, con personal policial y canes adquiridos en Colombia, 
+                          contando con la asesoría de instructores estadounidenses."</p>
+                  </div>
+              </div>
+              
+
+              <div class="timeline-header">
+                  <h2 class="timeline-header__title">ANTECEDENTES HISTORICOS DEL ACTUAL CENTRO REGIONAL DE ADIESTRAMIENTO CANINO</h2>
+                  <h3 class="timeline-header__subtitle">“Los inicios de lo que actualmente se consolida como el 
+                      Centro Regional de Adiestramiento Canino de la Policía Nacional, se remonta al mes de septiembre de 1988”</h3>
+              </div>
+
+
+              <div class="timeline-item" data-text="EL SUEÑO SE RENUEVA">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/pastor.gif" alt="Coronel Pastor">
+                      <h2 class="timeline__content-title">1988</h2>
+                      <p class="timeline__content-desc">"Los señores oficiales, Teniente de Policía Jorge Luis Pástor Peñaherrera, 
+                      Subteniente de Policía Víctor Hugo Londoño Molina, Subteniente de Policía Pedro Pablo Gallegos Herdoíza, 
+                      Subteniente de Policía Raúl Ávila Martínez, Subteniente de Policía Luis Barreno Ramos;     
+                      Mediante Orden General No. 173 del 6 de septiembre de 1988, fueron designados a realizar 
+                      el curso de Guiadores de Perros Antidrogas en la República Federal de Alemania, 
+                      el mismo que se cumplió en dos etapas: la primera desde el 06 de septiembre hasta el 18 de diciembre de 1988; 
+                      la segunda etapa se la cumplió en el Ecuador con el carácter de práctica, etapa que finalizó el 2 de febrero de 1989. 
+                      Los canes detectores de droga que fueron donados por la Policía de la República Federal de Alemania correspondían a 
+                      los nombres de: "AIRIN", "ASKAN", "AKO", "CLIFF", "AIKA" todos ellos de raza Pastor Alemán."</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="CURSO ANTIDROGAS CON CANES BAJO LA DIRECCIÓN DE LA POLICÍA BRITÁNICA">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1987.jpg" alt="Curso Cayambe">
+                      <h2 class="timeline__content-title">1988</h2>
+                      <p class="timeline__content-desc">Los señores: Cabo Segundo, Segundo Teodoro Tenorio Ramón y Policía Nacional 
+                          Jaime Andrade Tapia, pertenecientes al Comando Provincial Pichincha No.1 en el mes de noviembre de 1988, 
+                          realizaban el curso de Guías de canes detectores de drogas en la Escuela de Entrenamiento de Canes de la 
+                          Policía Militar Aduanera, en el cuartel de Cayambe con instructores de Gran Bretaña; este curso finalizó 
+                          el 7 de diciembre de 1988 y los canes detectores de drogas: "ZACK" de raza Pastor Alemán y "CELEV" de raza 
+                          Springel Spaniel, fueron donados por el Gobierno Británico a la Policía Nacional.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="PRIMER PARTE INFORMATIVO SOLICITANDO LA INTEGRACIÓN DE CANES A LA INTERPOL">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1990..png" alt="Guías caninos">
+                      <h2 class="timeline__content-title">1989</h2>
+                      <p class="timeline__content-desc">Mediante un Parte Informativo elevado al Señor Jefe de Estupefacientes e Interpol Pichincha de fecha, 
+                          Quito, 08 de febrero de 1989; el señor Teniente de Policía Jorge Pastor Peñaherrera, Interpol de Pichincha, pone en conocimiento 
+                          sobre la realización del curso de Guiadores de Perros Antidrogas en la República Federal de Alemania, así mismo se indica la nomina 
+                          de servidores Policiales y canes que se integran al servicio de Estupefacientes e INTERPOL.</p>
+                  </div>
+              </div>
+
+
+              <div class="timeline-item" data-text="AUTORIZACIÓN DE INTEGRACIÓN DE CANES AL SERVICIO ANTIDROGAS">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1990.png" alt="Servicio Antidrogas en el Aeropuerto Mariscal Sucre">
+                      <h2 class="timeline__content-title">1990</h2>
+                      <p class="timeline__content-desc">Mediante memorando No. 260-DNIEI-90, de fecha 21 de febrero de 1990, 
+                          suscrito por el señor Coronel de Policía de E.M. Gustavo Gallegos Balarezo, Director Nacional de 
+                          Investigaciones Estupefacientes e Interpol, dirigido al señor Teniente Coronel de Policía Hugo 
+                          Villavicencio Proaño, Jefe Provincial de Estupefacientes e Interpol de Pichincha, 
+                          se comunica la autorización por parte del señor Comandante General para la ejecución 
+                          del Programa de Canes Detectores de Drogas.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="EXPANSIÓN OPERATIVA EN AEROPUERTOS INTERNACIONALES (1992)">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1991.jpeg" alt="Servicio Antidrogas en el Aeropuerto Mariscal Sucre">
+                      <h2 class="timeline__content-title">1992</h2>
+                      <p class="timeline__content-desc">En 1992, el Centro de Adiestramiento Canino amplió su accionar al implementar el servicio de control 
+                        antidrogas en el aeropuerto internacional Simón Bolívar de Guayaquil, mediante la asignación de personal policial especializado 
+                        y canes detectores. Esta labor se desarrolló en el marco del Plan Operativo Génesis, diseñado por la Dirección Nacional 
+                        de Investigaciones Estupefacientes e Interpol, con el propósito de fortalecer el control del tráfico ilícito de drogas 
+                        en los aeropuertos internacionales de Quito y Guayaquil, constituyéndose en un hito trascendental.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="PERSONAL POLICIAL Y CANES EN OPERACIONES DE CONTROL ANTIDROGAS – AEROPUERTO INTERNACIONAL DE QUITO, 1992">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/crlpstr.jpeg" alt="Servicio Antidrogas en el Aeropuerto Mariscal Sucre">
+                      <h2 class="timeline__content-title">1992</h2>
+                      <p class="timeline__content-desc">Fotografía del personal de señores Oficiales, Clases, Policías y canes que realizaban 
+                        las operaciones de control antidrogas en el aeropuerto internacional de Quito en el año 1992, (de izquierda a derecha): 
+                        CboS. Segundo Collaguazo, Poli. Luis de La Cruz, Poli. Jaime Andrade, CboS. Segundo Tenorio, Tnte. Victor Hugo Londoño,
+                        Tnte. Jorge Pástor, Tnte. Pedro Gallegos, Poli. Eduardo Cisneros, Poli. Ernesto Anrango, Poli. Segundo Trujllo.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-header">
+                  <h2 class="timeline-header__title">EDIFICACIÓN DEL CENTRO REGIONAL DE ADIESTRAMIENTO CANINO 1993-1994</h2>
+                  <h3 class="timeline-header__subtitle">“Los inicios de lo que actualmente se consolida como el 
+                      Centro Regional de Adiestramiento Canino de la Policía Nacional, se remonta al mes de septiembre de 1988”</h3>
+              </div>
+
+
+              <div class="timeline-item" data-text="“UN SUEÑO QUE COMIENZA”">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/terreno.png" alt="Adquisición del terreno">
+                      <h2 class="timeline__content-title">1990</h2>
+                      <p class="timeline__content-desc">El 12 de enero de 1990, gracias a la visión y gestión de jóvenes oficiales, 
+                        el Municipio de Quito entrega en comodato un terreno de 12.600 m² en el Barrio Ponceano Bajo, 
+                        Urbanización Marisol tercera etapa, para la Policía Nacional. Este es el primer paso hacia la 
+                        construcción de un centro propio para el adiestramiento canino.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="DEL SUEÑO A LOS PLANOS”">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/maqueta.png" alt="Maqueta del Centro de Adiestramiento Canino">
+                      <h2 class="timeline__content-title">1992</h2>
+                      <p class="timeline__content-desc">Del 5 de mayo de 1992 al 31 de diciembre de 1992, con la firma del Convenio AD/ECU/92/670 con la ONU y la aprobación 
+                        del Plan Nacional para el Control de Drogas, se comienzan a elaborar los planos estructurales e 
+                        implantación de la obra, sentando las bases del futuro Centro de Adiestramiento Canino.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="“LA PRIMERA PIEDRA”">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/PRIMERA_PIEDRA/11.gif" alt="Colocación de la Primera Piedra">
+                      <h2 class="timeline__content-title">1993</h2>
+                      <p class="timeline__content-desc">El 19 de febrero de 1993, se celebra la ceremonia de colocación de la primera piedra, 
+                        con la presencia de autoridades nacionales e internacionales, marcando el inicio físico del 
+                        proyecto que transformará la historia del adiestramiento canino en Ecuador.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="“CONSTRUYENDO EL FUTURO”">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1993.JPG" alt="Construcción del Centro de Adiestramiento Canino">
+                      <h2 class="timeline__content-title">1993</h2>
+                      <p class="timeline__content-desc">El 23 de marzo de 1993, se inicia la construcción de la primera etapa del 
+                        Centro, con fondos de la ONU destinados a la edificación de caniles y áreas esenciales para los canes y 
+                        el personal de guías de canes de CAC.</p>
+                  </div>
+              </div>
+              
+              <div class="timeline-item" data-text="SEGUNDA ETAPA DE CONSTRUCCIÓN Y MODERNIZACIÓN">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/1995.JPG" alt="Segunda Etapa de Construcción y Modernización">
+                      <h2 class="timeline__content-title">1995</h2>
+                      <p class="timeline__content-desc">Se ejecutó la segunda fase: comedor, cocina, aulas, suites, dormitorios y 36 caniles adicionales, junto con la implementación del Departamento Veterinario con quirófano, rayos X y salas de aislamiento. Se adquirieron cuatro camionetas doble cabina para transporte de canes. Fue inaugurada el 14 de julio de 1995.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="PRIMER CURSO INTERNACIONAL DE GUÍAS Y DETECTORES DE DROGAS">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/IV.jpg" alt="Primer Curso Internacional de Guías y Detectores de Drogas">
+                      <h2 class="timeline__content-title">1998</h2>
+                      <p class="timeline__content-desc">Se desarrolló el IV Curso Nacional y I Internacional de guías caninos, con apoyo del UNDCP, Embajada Británica y la Policía de Colombia. Participaron 4 oficiales, 18 miembros de tropa y 20 canes provenientes de cooperación internacional. Se inauguraron laboratorios y áreas técnicas de almacenamiento de drogas.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="SEGUNDA ETAPA DE CONSTRUCCIÓN Y MODERNIZACIÓN">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/2003.jpg" alt="Segunda Etapa de Construcción y Modernización">
+                      <h2 class="timeline__content-title">2003</h2>
+                      <p class="timeline__content-desc">Se construyeron 14 caniles nuevos, se amplió el cerramiento y se inició el relleno de una quebrada para ampliar las zonas de entrenamiento. Se implementó un plan de autofinanciamiento de la clínica veterinaria para mejorar su sostenibilidad.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="IMPLEMENTACIÓN DE CANOTERAPIA EN EL CRAC">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/2010.png" alt="Implementación de Canoterapia en el CAC">
+                      <h2 class="timeline__content-title">2010</h2>
+                      <p class="timeline__content-desc">Tras una gira técnica en Chile, se implementó el programa de Canoterapia en convenio con la Dirección Nacional de Salud y FUNDEBIP. Se adecuaron oficinas y áreas especializadas para atención de niños.
+                      El 1 de febrero de 2010 el Centro ascendió a categoría de Centro Regional de Adiestramiento Canino (CRAC).</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="INAUGURACIÓN DE LA GALERÍA HISTÓRICA">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/2012.jpeg" alt="Inauguración de la Galería Histórica">
+                      <h2 class="timeline__content-title">2012</h2>
+                      <p class="timeline__content-desc">El 31 de mayo de 2012 se inauguró la Galería Histórica del CRAC, nombrada en honor al Suboficial Mayor Segundo Teodoro Tenorio Ramón, como reconocimiento a su destacada trayectoria y aporte al desarrollo del CRAC.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-item" data-text="FACILITADORES DEL COMERCIO EXTERIOR">
+                  <div class="timeline__content">
+                      <img class="timeline__img" src="img/historia/2025.jpg" alt="Referente Nacional e Internacional">
+                      <h2 class="timeline__content-title">ACTUALIDAD</h2>
+                      <p class="timeline__content-desc">La Unidad Nacional Canina es hoy un modelo regional en formación, certificación y operaciones caninas en detección, orden público, búsqueda, terapias y prevención. Su trayectoria refleja más de seis décadas de evolución, compromiso y servicio al Ecuador.</p>
+                  </div>
+              </div>
+          
+
+              <!-- SEGUIR EDITANDO -->
+
+
+          </div>
+
+          <div class="demo-footer">
+              <a href="http://www.turkishnews.com/Ataturk/life.htm" target="_blank">Diseño - Source/Kaynak</a>
+          </div>
+      </div>
+  </section>
+
+    <!-- Enlace al archivo timeline.js -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="js/timeline.js"></script>
+
+    <!-- FINAL DE LA LINEA DE TIEMPO -->
+
+  <!-- Reconocimientos -->
+
+  <section
+    id="reconocimientos"
+    class="section fade-in"
+    style="background: var(--light-gray)"
+  >
+    <h2 class="section-title">Reconocimientos Nacionales e Internacionales</h2>
+    <div class="reconocimientos-grid">
+      
+      <div class="reconocimiento-card">
+        <div class="reconocimiento-icon">
+          <img src="img/reconocimientos/2013.png" alt="Certificación Internacional" style="width:200px; height:auto; border-radius:5px; border:1px solid #ccc;">
+        </div>
+        <h3>Reconocimiento a la Excelencia</h3>
+        <p>
+          Otorgada por la Embajada de los Estados Unidos de América. (2013)
+        </p>
+      </div>
+
+
+      <div class="reconocimiento-card">
+        <div class="reconocimiento-icon">
+          <img src="img/reconocimientos/2017.jpg" alt="Medalla al Mérito Policial" style="width:200px; height:auto; border-radius:5px; border:1px solid #ccc;">
+        </div>
+        <h3>Reconocimiento al Mérito</h3>
+        <p>
+          Otorgada por el U. S. Department of Homeland Security Homeland Security Investigations. (2017)
+        </p>
+      </div>
+
+
+      <div class="reconocimiento-card">
+        <div class="reconocimiento-icon">
+          <img src="img/reconocimientos/2018.jpg" alt="Premio Excelencia Operativa" style="width: 200px; height:auto; border-radius:5px; border:1px solid #ccc;">
+        </div>
+        <h3>DRUG ENFORCEMENT ADMINISTRATION (DEA)</h3>
+        <p>
+          Reconocimiento al cumplir 30 años de la fundación del Centro Regional de Adiestramiento Canino.
+        </p>
+
+    
+      </div>
+
+      <div class="reconocimiento-card">
+        <div class="reconocimiento-icon">
+          <img src="img/reconocimientos/2019.jpg" alt="Distinción Presidencial" style="width: 200px; height:auto; border-radius:5px; border:1px solid #ccc;">
+        </div>
+        <h3>DEA QUITO COUNTRY OFFICE</h3>
+        <p>
+          Reconocimiento al conmemorar el Trigésimo Primer Aniversario de su creación. (2019)
+          
+        </p>
+      </div>
+
+      <div class="reconocimiento-card">
+        <div class="reconocimiento-icon">
+          <img src="img/reconocimientos/2021.jpg" alt="Cooperación Internacional" style="width:200px; height:auto; border-radius:5px; border:1px solid #ccc;">
+        </div>
+        <h3>DRUG ENFORCEMENT ADMINISTRATION (DEA)</h3>
+        <p>
+          Reconocimiento por mayor cantidad de decomisos de sustancias
+          ilícitas en Sudamérica (2021)
+        </p>
+      </div>
+
+      <div class="reconocimiento-card">
+        <div class="reconocimiento-icon">
+          <img src="img/reconocimientos/2024.jpg" alt="Unidad del Año" style="width: 200px; height:auto; border-radius:5px; border:1px solid #ccc;">
+        </div>
+        <h3>UK Home Office International Operations (HOIO)</h3>
+        <p>
+        For the exceptional dedication, together with significant Class A Drugs. (2024)
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  </main>
+
+  <!-- BOTÓN PARA REGRESAR AL INICIO-->
+  <button class="scroll-to-top" id="scrollToTop" title="Volver al inicio">
+  </button>
+
+
+  <!-- Footer -->
+  <footer id="contactos" class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p><i class="fas fa-phone"></i>  +593 984328123</p>
+        <p>
+          <i class="fas fa-envelope"></i>  d@policia.gob.ec
+        </p>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> Dri: Ponciano Bajo, Calle Juana Terrazas N° 156
+        </p>
+      </div>
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/15YEyQrMPB/?mibextid=wwXIfr" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://x.com/PoliciaEcuador?t=-iB3hHJlZOMwL2oabU8jIQ&s=09" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/policiaecuadoroficial?igsh=MTRrZngyZjhycXNleA==" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/c/PoliciaNacionalDelEcuador" title="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+        <h4 style="margin-top: 1.5rem; color: var(--canine-yellow)">
+          Horarios de Atención
+        </h4>
+        <p>Lunes a Viernes: 08:00 - 17:00</p>
+        <p>Emergencias: 24/7</p>
+      </div>
+      <div class="footer-section">
+        <h3>Unidad Nacional Canina</h3>
+        <div class="map-container">
+          <div style="text-align: center">
+            <i
+              class="fas fa-map-marked-alt"
+              style="font-size: 2rem; margin-bottom: 0.5rem;"
+            ></i>
+            <p></p>
+            <p style="font-size: 0.9rem; opacity: 0">
+              Ponciano Bajo, Quito - Ecuador
+            </p>
+            
+            <div style="margin-top: 1rem;">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.9058228144572!2d-78.48960829935486!3d-0.10480390605214697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5859b7a8d3ca7%3A0x3bc041e0cc3e6148!2sCentro%20de%20Adiestramiento%20Canino%2C%20Quito%20170144!5e0!3m2!1ses!2sec!4v1757541510942!5m2!1ses!2sec"
+                width="100%"
+                height="250"
+                style="border:0; border-radius: 10px;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            
+            <button
+              onclick="window.open('https://maps.app.goo.gl/JjLpY24vK7gmHpXH6')"
+              style="
+                background: var(--canine-yellow);
+                color: var(--canine-black);
+                border: none;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                margin-top: 0.5rem;
+                cursor: pointer;
+              "
+            >
+              <i class="fas fa-external-link-alt"></i> Ubicación!
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Página Oficial de la Policía Nacional del Ecuador</h3>
+        <p>
+          <a href="https://www.policia.gob.ec/" style="color: var(--white); text-decoration: none"
+            >Policía Nacional del Ecuador</a
+          >
+        <h4 style="margin-top: 1.5rem; color: var(--canine-yellow)">
+          Grupos Caninos
+        </h4>
+        <p> Antidrogas</p>
+        <p> Control del Orden</p>
+        <p> Búsqueda y Rescate</p>
+        <p> Relaciones Públicas y Show</p>
+        <p> Terapia Asistida</p>
+      </div>
+    </div>
+    <div
+      style="
+        border-top: 1px solid var(--police-gray);
+        margin-top: 2rem;
+        padding-top: 1rem;
+        text-align: center;
+        color: var(--police-gray);
+      "
+    >
+      <p>
+        &copy; 2025 Policía Nacional del Ecuador - Unidad Nacional Canina .
+        Todos los derechos reservados.
+      </p>
+      <p style="font-size: 0.9rem; margin-top: 0.5rem">
+        "Fieles Amigos al Servicio de la Comunidad"
+      </p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Botón flotante -->
+  <div class="whatsapp-float" onclick="openWhatsApp()">
+    <i class="fab fa-whatsapp"></i>
+    <div class="whatsapp-tooltip">¡Contáctanos por WhatsApp!</div>
+  </div>
+
+  <!-- WhatsApp Botón flotante funciones de JavaScript -->
+  <script>
+  // Smooth scrolling for navigation
+  function scrollToSection(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
+
+  // Navigation active state
+  document.addEventListener('DOMContentLoaded', function () {
+    const navLinks = document.querySelectorAll('.nav a');
+    const sections = document.querySelectorAll('.section');
+
+    window.addEventListener('scroll', function () {
+      let current = '';
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Add click event to nav links
+      navLinks.forEach((link) => {
+        link.addEventListener('click', function (e) {
+          // Si es un enlace externo, permitir que se abra normalmente
+          if (this.href.startsWith('http')) {
+            return; // No prevenir comportamiento por defecto
+          }
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          scrollToSection(targetId);
+        });
+      });
+
+    // Animate elements on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px',
+    };
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          if (entry.target.id !== 'inicio') { // solo las demás secciones bajan
+            entry.target.style.transform = 'translateY(0)';
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections, pero inicio queda fijo
+    sections.forEach((section) => {
+      if (section.id !== 'inicio') { 
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+      } else {
+        section.style.opacity = '1';
+        section.style.transform = 'translateY(0)';
+      }
+      section.style.transition = 'all 0.6s ease';
+      observer.observe(section);
+    });
+
+    // Mobile menu functionality
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const nav = document.querySelector('.nav');
+
+    mobileMenu.addEventListener('click', function () {
+      nav.classList.toggle('active');
+    });
+
+    // Add mobile menu styles
+    const style = document.createElement('style');
+    style.textContent = `
+      @media (max-width: 768px) {
+          .nav {
+              position: absolute;
+              top: 100%;
+              left: 0;
+              right: 0;
+              background: var(--canine-black);
+              flex-direction: column;
+              padding: 1rem;
+              gap: 1rem;
+              transform: translateY(-100%);
+              opacity: 0;
+              visibility: hidden;
+              transition: all 0.3s ease;
+          }
+          
+          .nav.active {
+              transform: translateY(0);
+              opacity: 1;
+              visibility: visible;
+          }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Counter animation for statistics
+    function animateCounter(element, target, duration = 2000) {
+      let start = 0;
+      const increment = target / (duration / 16);
+      const counter = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          element.textContent = target.toString().includes('.')
+            ? target
+            : Math.floor(target).toLocaleString();
+          clearInterval(counter);
+        } else {
+          element.textContent = target.toString().includes('.')
+            ? start.toFixed(1)
+            : Math.floor(start).toLocaleString();
+        }
+      }, 16);
+    }
+
+    // Animate statistics when visible
+    const statObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            !entry.target.classList.contains('animated')
+          ) {
+            const number = entry.target.querySelector('.stat-number');
+            if (number) {
+              const targetText = number.textContent;
+              const target = parseFloat(targetText.replace(/[,%]/g, ''));
+              number.textContent = '0';
+
+              setTimeout(() => {
+                animateCounter(number, target);
+                if (targetText.includes('%')) {
+                  setTimeout(() => {
+                    number.textContent = targetText;
+                  }, 2100);
+                }
+              }, 300);
+
+              entry.target.classList.add('animated');
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    document.querySelectorAll('.stat-card').forEach((card) => {
+      statObserver.observe(card);
+    });
+  });
+
+  // WhatsApp functionality
+  function openWhatsApp() {
+    const tooltip = document.querySelector('.whatsapp-tooltip');
+    const originalText = tooltip.textContent;
+    tooltip.textContent = '✏️ Escribiendo...';
+
+    setTimeout(() => {
+      tooltip.textContent = originalText;
+      const phoneNumber = '593984328123'; // número coordinación estratégica.
+      const message = encodeURIComponent(
+        'Hola, me gustaría obtener información sobre la Unidad Nacional Canina.'
+      );
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }, 2000);
+  }
+
+  // Add hover effects to cards
+  document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll(
+      '.reconocimiento-card, .revista-card, .stat-card'
+    );
+
+    cards.forEach((card) => {
+      card.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+        this.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+      });
+
+      card.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateY(0) scale(1)';
+        this.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+      });
+    });
+  });
+
+  // Add loading animation
+  window.addEventListener('load', function () {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+
+    setTimeout(() => {
+      document.body.style.opacity = '1';
+    }, 100);
+  });
+
+  // Print functionality
+  function printPage() {
+    window.print();
+  }
+
+  // Add keyboard navigation
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelector('.nav').classList.remove('active');
+    }
+  });
+
+  // Lazy loading for images
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove('lazy');
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach((img) => {
+      imageObserver.observe(img);
+    });
+  }
+
+  // carousel de imagenes
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.background-slideshow .slide');
+    let currentSlide = 0;
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(nextSlide, 5000);
+  });
+
+  // BOTÓN PARA REGRESAR AL INICIO
+  (function() {
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+    
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+  })();
+
+  // FIN DEL BOTÓN PARA REGRESAR AL INICIO
+      </script>
+    </body>
+  </html>
+
+
+
+
